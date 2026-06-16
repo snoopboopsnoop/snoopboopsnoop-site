@@ -1,0 +1,211 @@
+.journalPage {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.journalShell {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.journalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.journalHeader .coffeeEyebrow {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+  text-indent: 0.14em;
+}
+
+.journalHeader h1 {
+  margin: 0;
+  max-width: 720px;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: #b18365;
+}
+
+.journalHeader p {
+  max-width: 620px;
+  margin: 24px 0 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #5f4a3d;
+}
+
+.brewList {
+  display: grid;
+  gap: 16px;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 4px 4px 16px;
+
+  scrollbar-width: none;
+}
+
+.brewCard {
+  border: 1px solid #dac7b8;
+  border-radius: 24px;
+  background: #fffaf5;
+  overflow: hidden;
+  box-shadow: 0 12px 24px rgba(44, 26, 18, 0.06);
+}
+
+.brewCardButton {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  padding: 22px;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+}
+
+.brewCardMain {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.brewDate {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  color: #8d6a52;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brewCard h2 {
+  margin: 0;
+  color: #2c1a12;
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.brewMeta {
+  margin: 8px 0 0;
+  color: #7c5c44;
+}
+
+.brewRating {
+  flex: 0 0 auto;
+  min-width: 64px;
+  padding: 10px 12px;
+  border-radius: 18px;
+  background: #f1dfcf;
+  color: #2c1a12;
+  text-align: center;
+}
+
+.brewRating span {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.brewRating small {
+  display: block;
+  margin-top: 2px;
+  color: #7c5c44;
+}
+
+.brewRecipe {
+  margin: 18px 0 0;
+  color: #2c1a12;
+  font-weight: 700;
+}
+
+.brewPreview {
+  margin: 10px 0 0;
+  color: #5f4a3d;
+  line-height: 1.6;
+}
+
+.brewExpandLabel {
+  display: inline-block;
+  margin-top: 16px;
+  color: #b18365;
+  font-weight: 700;
+}
+
+.brewDetails {
+  border-top: 1px solid #ead9cb;
+  padding: 20px 22px 22px;
+  background: #fff4ea;
+}
+
+.brewDetails dl {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.brewDetails div {
+  min-width: 0;
+}
+
+.brewDetails dt {
+  margin-bottom: 4px;
+  font-size: 0.75rem;
+  color: #8d6a52;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.brewDetails dd {
+  margin: 0;
+  color: #2c1a12;
+  font-weight: 700;
+}
+
+.tastingNotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.tastingNotes span {
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #2c1a12;
+  color: #fff7ef;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .journalHeader {
+    display: block;
+  }
+
+  .journalHeader .coffeeButton {
+    margin-top: 24px;
+  }
+
+  .brewList {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .brewCardMain {
+    gap: 16px;
+  }
+
+  .brewDetails dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,15 +1,32 @@
+import BrewCard from "../components/BrewCard";
+import { brews } from "../data/brews";
 import "../styles/coffee.css";
+import "../styles/brewJournal.css";
 
 export default function BrewJournalPage() {
   return (
-    <main className="coffeePage">
-      <section className="coffeeHero">
-        <p className="coffeeEyebrow">coming soon</p>
-        <h1>Brew journal</h1>
-        <p>This page exists, but we have not built the real brew journal yet.</p>
-        <a className="coffeeButton" href="/coffee">
-          Back to coffee
-        </a>
+    <main className="coffeePage journalPage">
+      <section className="journalShell">
+        <header className="journalHeader">
+          <div>
+            <p className="coffeeEyebrow">snoopboopsnoop coffee</p>
+            <h1>Brew journal</h1>
+            <p>
+              Notes from recent brews, recipes worth repeating, and small
+              adjustments for next time.
+            </p>
+          </div>
+
+          <a className="coffeeButton" href="/coffee">
+            Back to coffee
+          </a>
+        </header>
+
+        <section className="brewList" aria-label="Brew journal entries">
+          {brews.map((brew) => (
+            <BrewCard key={brew.id} brew={brew} />
+          ))}
+        </section>
       </section>
     </main>
   );
