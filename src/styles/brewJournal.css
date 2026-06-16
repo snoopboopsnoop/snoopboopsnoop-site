@@ -188,12 +188,32 @@
 }
 
 @media (max-width: 760px) {
+  .journalPage {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+  }
+
   .journalHeader {
     display: block;
+    margin-bottom: 24px;
+  }
+
+  .journalHeader h1 {
+    font-size: clamp(2.4rem, 14vw, 4rem);
+  }
+
+  .journalHeader p {
+    margin-top: 16px;
   }
 
   .journalHeader .coffeeButton {
     margin-top: 24px;
+  }
+
+  .brewList {
+    max-height: none;
+    overflow-y: visible;
   }
 
   .brewCardMain {
