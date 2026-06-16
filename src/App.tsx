@@ -5,7 +5,7 @@ function HomePage() {
     <main className="page">
       <section className="hero">
         <h1>snoopboopsnoop</h1>
-        <p>bobr bobr bobr bobr</p>
+        <p>bobr bobr bobr bobr bobr</p>
 
         <a className="button" href="/coffee">
           Go to coffee app
