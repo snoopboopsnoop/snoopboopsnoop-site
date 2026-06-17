@@ -6,75 +6,183 @@ type BrewCardProps = {
 };
 
 export default function BrewCard({ brew }: BrewCardProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [openSection, setOpenSection] = useState<
+    "coffee" | "recipe" | "notes" | null
+  >(null);
+
+  function toggleSection(section: "coffee" | "recipe" | "notes") {
+    setOpenSection((current) => (current === section ? null : section));
+  }
 
   return (
     <article className="brewCard">
-      <button
-        className="brewCardButton"
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-expanded={isOpen}
-      >
+      <div className="brewCardContent">
         <div className="brewCardMain">
           <div>
             <p className="brewDate">{brew.date}</p>
-            <h2>{brew.coffeeName}</h2>
+            <h2>{brew.coffee.name}</h2>
             <p className="brewMeta">
-              {brew.roaster} · {brew.method}
+              {brew.coffee.roaster} · {brew.recipe.method}
             </p>
           </div>
 
-          <div className="brewRating">
-            <span>{brew.rating}</span>
-            <small>/10</small>
-          </div>
+          {brew.rating !== undefined && (
+            <div className="brewRating">
+              <span>{brew.rating}</span>
+              <small>/10</small>
+            </div>
+          )}
         </div>
 
-        <p className="brewRecipe">{brew.recipe}</p>
+        <p className="brewRecipeSummary">
+          {brew.recipe.dose} coffee / {brew.recipe.totalWater} water
+          {brew.recipe.totalTime ? ` / ${brew.recipe.totalTime}` : ""}
+        </p>
+
         <p className="brewPreview">{brew.notes}</p>
 
-        <span className="brewExpandLabel">
-          {isOpen ? "Hide details" : "Show details"}
-        </span>
-      </button>
+        <div className="brewCardActions">
+          <button
+            className="brewSectionButton"
+            type="button"
+            onClick={() => toggleSection("coffee")}
+            aria-expanded={openSection === "coffee"}
+          >
+            {openSection === "coffee" ? "Hide coffee" : "Coffee info"}
+          </button>
 
-      {isOpen && (
+          <button
+            className="brewSectionButton"
+            type="button"
+            onClick={() => toggleSection("recipe")}
+            aria-expanded={openSection === "recipe"}
+          >
+            {openSection === "recipe" ? "Hide recipe" : "Recipe"}
+          </button>
+
+          <button
+            className="brewSectionButton"
+            type="button"
+            onClick={() => toggleSection("notes")}
+            aria-expanded={openSection === "notes"}
+          >
+            {openSection === "notes" ? "Hide notes" : "Tasting"}
+          </button>
+        </div>
+      </div>
+
+      {openSection === "coffee" && (
         <div className="brewDetails">
-          <dl>
-            <div>
-              <dt>Dose</dt>
-              <dd>{brew.details.dose}</dd>
-            </div>
+          <dl className="coffeeInfoGrid">
+            <InfoItem label="Origin" value={brew.coffee.origin} />
+            <InfoItem label="Region" value={brew.coffee.region} />
+            <InfoItem label="Farm" value={brew.coffee.farm} />
+            <InfoItem label="Producer" value={brew.coffee.producer} />
+            <InfoItem label="Altitude" value={brew.coffee.altitude} />
+            <InfoItem label="Variety" value={brew.coffee.variety} />
+            <InfoItem label="Process" value={brew.coffee.process} />
+            <InfoItem label="Roast date" value={brew.coffee.roastDate} />
+          </dl>
+        </div>
+      )}
 
-            <div>
-              <dt>Water</dt>
-              <dd>{brew.details.water}</dd>
-            </div>
-
-            <div>
-              <dt>Grind</dt>
-              <dd>{brew.details.grind}</dd>
-            </div>
-
-            <div>
-              <dt>Temperature</dt>
-              <dd>{brew.details.temperature}</dd>
-            </div>
-
-            <div>
-              <dt>Time</dt>
-              <dd>{brew.details.time}</dd>
-            </div>
+      {openSection === "recipe" && (
+        <div className="brewDetails">
+          <dl className="recipeInfoGrid">
+            <InfoItem label="Brewer" value={brew.recipe.brewer} />
+            <InfoItem label="Filter" value={brew.recipe.filter} />
+            <InfoItem label="Grinder" value={brew.recipe.grinder} />
+            <InfoItem label="Grind" value={brew.recipe.grindSetting} />
+            <InfoItem label="Dose" value={brew.recipe.dose} />
+            <InfoItem label="Water" value={brew.recipe.totalWater} />
+            <InfoItem
+              label="Temperature"
+              value={brew.recipe.waterTemperature}
+            />
+            <InfoItem label="Total time" value={brew.recipe.totalTime} />
           </dl>
 
+          <ol className="recipeSteps">
+            {brew.recipe.steps.map((step) => (
+              <li key={`${step.time}-${step.water}-${step.action}`}>
+                <span className="recipeStepTime">{step.time}</span>
+                <span className="recipeStepWater">{step.water}</span>
+                <span className="recipeStepAction">{step.action}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+
+      {openSection === "notes" && (
+        <div className="brewDetails">
+          {brew.ratings && (
+            <div className="tastingRatings">
+              <RatingBar label="Acidity" value={brew.ratings.acidity} />
+              <RatingBar label="Sweetness" value={brew.ratings.sweetness} />
+              <RatingBar label="Bitterness" value={brew.ratings.bitterness} />
+              <RatingBar label="Body" value={brew.ratings.body} />
+              <RatingBar label="Clarity" value={brew.ratings.clarity} />
+              <RatingBar label="Balance" value={brew.ratings.balance} />
+            </div>
+          )}
+
+          <p className="brewFullNotes">{brew.notes}</p>
+
           <div className="tastingNotes">
-            {brew.details.tastingNotes.map((note) => (
+            {brew.tastingNotes.map((note) => (
               <span key={note}>{note}</span>
             ))}
           </div>
         </div>
       )}
     </article>
+  );
+}
+
+function InfoItem({
+  label,
+  value,
+}: {
+  label: string;
+  value: string | undefined;
+}) {
+  if (!value) {
+    return null;
+  }
+
+  return (
+    <div>
+      <dt>{label}</dt>
+      <dd>{value}</dd>
+    </div>
+  );
+}
+
+function RatingBar({
+  label,
+  value,
+}: {
+  label: string;
+  value: number | undefined;
+}) {
+  if (value === undefined) {
+    return null;
+  }
+
+  return (
+    <div className="tastingRating">
+      <div className="tastingRatingHeader">
+        <span>{label}</span>
+        <strong>{value}/5</strong>
+      </div>
+
+      <div className="tastingRatingTrack" aria-hidden="true">
+        <div
+          className="tastingRatingFill"
+          style={{ width: `${(value / 5) * 100}%` }}
+        />
+      </div>
+    </div>
   );
 }

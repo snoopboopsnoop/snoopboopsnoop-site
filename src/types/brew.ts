@@ -1,18 +1,51 @@
+export type CoffeeInfo = {
+  name: string;
+  roaster: string;
+  origin?: string;
+  region?: string;
+  farm?: string;
+  producer?: string;
+  altitude?: string;
+  variety?: string;
+  process?: string;
+  roastDate: string;
+};
+
+export type RecipeStep = {
+  time: string;
+  water: string;
+  action: string;
+};
+
+export type BrewRecipe = {
+  method: string;
+  brewer?: string;
+  filter?: string;
+  grinder?: string;
+  grindSetting?: string;
+  dose: string;
+  totalWater: string;
+  waterTemperature?: string;
+  totalTime?: string;
+  steps: RecipeStep[];
+};
+
+export type TastingRatings = {
+  acidity?: number;
+  sweetness?: number;
+  bitterness?: number;
+  body?: number;
+  clarity?: number;
+  balance?: number;
+};
+
 export type Brew = {
   id: string;
   date: string;
-  coffeeName: string;
-  roaster: string;
-  method: string;
-  recipe: string;
-  rating: number;
+  coffee: CoffeeInfo;
+  recipe: BrewRecipe;
+  rating?: number;
+  ratings?: TastingRatings;
   notes: string;
-  details: {
-    dose: string;
-    water: string;
-    grind: string;
-    temperature: string;
-    time: string;
-    tastingNotes: string[];
-  };
+  tastingNotes: string[];
 };

@@ -62,15 +62,8 @@
   box-shadow: 0 12px 24px rgba(44, 26, 18, 0.06);
 }
 
-.brewCardButton {
-  width: 100%;
-  border: 0;
-  background: transparent;
+.brewCardContent {
   padding: 22px;
-  text-align: left;
-  color: inherit;
-  cursor: pointer;
-  font: inherit;
 }
 
 .brewCardMain {
@@ -122,7 +115,7 @@
   color: #7c5c44;
 }
 
-.brewRecipe {
+.brewRecipeSummary {
   margin: 18px 0 0;
   color: #2c1a12;
   font-weight: 700;
@@ -134,24 +127,33 @@
   line-height: 1.6;
 }
 
-.brewExpandLabel {
-  display: inline-block;
+.brewCardActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   margin-top: 16px;
-  color: #b18365;
+}
+
+.brewSectionButton {
+  border: 1px solid #dac7b8;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #fff4ea;
+  color: #7c4f34;
+  font: inherit;
+  font-size: 0.9rem;
   font-weight: 700;
+  cursor: pointer;
+}
+
+.brewSectionButton:hover {
+  background: #f1dfcf;
 }
 
 .brewDetails {
   border-top: 1px solid #ead9cb;
   padding: 20px 22px 22px;
   background: #fff4ea;
-}
-
-.brewDetails dl {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 12px;
-  margin: 0;
 }
 
 .brewDetails div {
@@ -187,6 +189,90 @@
   font-size: 0.9rem;
 }
 
+.tastingRatings {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.tastingRating {
+  min-width: 0;
+}
+
+.tastingRatingHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+  color: #2c1a12;
+  font-size: 0.9rem;
+}
+
+.tastingRatingHeader span {
+  color: #7c5c44;
+  font-weight: 700;
+}
+
+.tastingRatingHeader strong {
+  color: #2c1a12;
+}
+
+.tastingRatingTrack {
+  height: 8px;
+  border-radius: 999px;
+  background: #ead9cb;
+  overflow: hidden;
+}
+
+.tastingRatingFill {
+  height: 100%;
+  border-radius: inherit;
+  background: #b18365;
+}
+
+.coffeeInfoGrid,
+.recipeInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.recipeSteps {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recipeSteps li {
+  display: grid;
+  grid-template-columns: 72px 72px 1fr;
+  gap: 12px;
+  align-items: baseline;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: #fffaf5;
+}
+
+.recipeStepTime,
+.recipeStepWater {
+  color: #8d6a52;
+  font-weight: 800;
+}
+
+.recipeStepAction {
+  color: #2c1a12;
+}
+
+.brewFullNotes {
+  margin: 0;
+  color: #5f4a3d;
+  line-height: 1.6;
+}
+
 @media (max-width: 760px) {
   .journalPage {
     height: auto;
@@ -220,7 +306,17 @@
     gap: 16px;
   }
 
-  .brewDetails dl {
+  .coffeeInfoGrid,
+  .recipeInfoGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recipeSteps li {
+    grid-template-columns: 56px 64px 1fr;
+    gap: 8px;
+  }
+
+  .tastingRatings {
+    grid-template-columns: 1fr;
   }
 }
