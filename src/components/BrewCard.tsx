@@ -1,11 +1,13 @@
 import { useState } from "react";
+import type { Bean } from "../types/bean";
 import type { Brew } from "../types/brew";
 
 type BrewCardProps = {
   brew: Brew;
+  bean: Bean;
 };
 
-export default function BrewCard({ brew }: BrewCardProps) {
+export default function BrewCard({ brew, bean }: BrewCardProps) {
   const [openSection, setOpenSection] = useState<
     "coffee" | "recipe" | "notes" | null
   >(null);
@@ -20,9 +22,9 @@ export default function BrewCard({ brew }: BrewCardProps) {
         <div className="brewCardMain">
           <div>
             <p className="brewDate">{brew.date}</p>
-            <h2>{brew.coffee.name}</h2>
+            <h2>{bean.name}</h2>
             <p className="brewMeta">
-              {brew.coffee.roaster} · {brew.recipe.method}
+              {bean.roaster} · {brew.recipe.method}
             </p>
           </div>
 
@@ -74,14 +76,14 @@ export default function BrewCard({ brew }: BrewCardProps) {
       {openSection === "coffee" && (
         <div className="brewDetails">
           <dl className="coffeeInfoGrid">
-            <InfoItem label="Origin" value={brew.coffee.origin} />
-            <InfoItem label="Region" value={brew.coffee.region} />
-            <InfoItem label="Farm" value={brew.coffee.farm} />
-            <InfoItem label="Producer" value={brew.coffee.producer} />
-            <InfoItem label="Altitude" value={brew.coffee.altitude} />
-            <InfoItem label="Variety" value={brew.coffee.variety} />
-            <InfoItem label="Process" value={brew.coffee.process} />
-            <InfoItem label="Roast date" value={brew.coffee.roastDate} />
+            <InfoItem label="Origin" value={bean.origin} />
+            <InfoItem label="Region" value={bean.region} />
+            <InfoItem label="Farm" value={bean.farm} />
+            <InfoItem label="Producer" value={bean.producer} />
+            <InfoItem label="Altitude" value={bean.altitude} />
+            <InfoItem label="Variety" value={bean.variety} />
+            <InfoItem label="Process" value={bean.process} />
+            <InfoItem label="Roast date" value={bean.roastDate} />
           </dl>
         </div>
       )}

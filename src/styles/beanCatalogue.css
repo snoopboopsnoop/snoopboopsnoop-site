@@ -1,0 +1,246 @@
+.beanCataloguePage {
+  align-items: flex-start;
+}
+
+.beanCatalogueShell {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+}
+
+.beanCatalogueHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 36px;
+  text-align: left;
+}
+
+.beanCatalogueHeader .coffeeEyebrow {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.beanCatalogueHeader h1 {
+  margin: 0;
+  max-width: 720px;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: #b18365;
+}
+
+.beanCatalogueHeader p {
+  max-width: 620px;
+  margin: 24px 0 0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #5f4a3d;
+}
+
+.beanShelf {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 48px 24px;
+  align-items: stretch;
+  padding: 28px;
+  border-radius: 28px;
+  background: #ead9cb;
+  box-shadow: 0 18px 36px rgba(44, 26, 18, 0.1);
+}
+
+.beanBag {
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+}
+
+.beanBag::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  height: 18px;
+  border-radius: 0 0 12px 12px;
+  background: #9a6a48;
+  box-shadow: 0 8px 16px rgba(44, 26, 18, 0.18);
+}
+
+.beanBagInner {
+  position: relative;
+  width: 100%;
+  min-height: 320px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 500ms ease;
+}
+
+.beanBagInnerFlipped {
+  transform: rotateY(180deg);
+}
+
+.beanBagFace {
+  grid-area: 1 / 1;
+  min-height: 320px;
+  border-radius: 20px 20px 12px 12px;
+  overflow: hidden;
+  backface-visibility: hidden;
+  box-shadow: 0 12px 24px rgba(44, 26, 18, 0.08);
+}
+
+.beanBagFront {
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.42), transparent 45%),
+    #c79673;
+  color: #2c1a12;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.beanBagBack {
+  padding: 18px;
+  background: #fff4ea;
+  border: 1px solid #dac7b8;
+  color: #2c1a12;
+  transform: rotateY(180deg);
+
+  display: flex;
+  flex-direction: column;
+}
+
+.beanBagTop,
+.beanBagBottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(44, 26, 18, 0.75);
+}
+
+.beanBagLabel {
+  padding: 16px;
+  border-radius: 16px;
+  background: #fffaf5;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(44, 26, 18, 0.08);
+}
+
+.beanBagLabel p {
+  margin: 0;
+  color: #7c5c44;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.beanBagLabel h2 {
+  margin: 8px 0;
+  color: #2c1a12;
+  font-size: 1.5rem;
+  line-height: 1.05;
+}
+
+.beanBagBackHeader {
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.beanBagBackHeader p {
+  margin: 0;
+  color: #7c5c44;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.beanBagBackHeader h2 {
+  margin: 6px 0 0;
+  color: #2c1a12;
+  font-size: 1.25rem;
+  line-height: 1.05;
+}
+
+.beanBagInfoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+
+.beanBagInfoGrid div {
+  min-width: 0;
+}
+
+.beanBagInfoGrid dt {
+  margin-bottom: 3px;
+  font-size: 0.68rem;
+  color: #8d6a52;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.beanBagInfoGrid dd {
+  margin: 0;
+  color: #2c1a12;
+  font-size: 0.85rem;
+  font-weight: 700;
+  overflow-wrap: break-word;
+}
+
+.beanTastingNotes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+.beanTastingNotes span {
+  padding: 6px 8px;
+  border-radius: 999px;
+  background: #2c1a12;
+  color: #fff7ef;
+  font-size: 0.78rem;
+}
+
+.beanFlipHint {
+  margin: auto 0 0;
+  padding-top: 12px;
+  color: #8d6a52;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 860px) {
+  .beanCatalogueHeader {
+    display: block;
+  }
+
+  .beanCatalogueHeader .coffeeButton {
+    margin-top: 24px;
+  }
+
+  .beanShelf {
+    grid-template-columns: repeat(2, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .beanShelf {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+}

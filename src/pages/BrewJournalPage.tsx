@@ -1,5 +1,6 @@
 import BrewCard from "../components/BrewCard";
 import { brews } from "../data/brews";
+import { beans } from "../data/beans";
 import "../styles/coffee.css";
 import "../styles/brewJournal.css";
 
@@ -23,9 +24,15 @@ export default function BrewJournalPage() {
         </header>
 
         <section className="brewList" aria-label="Brew journal entries">
-          {brews.map((brew) => (
-            <BrewCard key={brew.id} brew={brew} />
-          ))}
+          {brews.map((brew) => {
+            const bean = beans.find((bean) => bean.id === brew.beanId);
+
+            if (!bean) {
+              return null;
+            }
+
+            return <BrewCard key={brew.id} brew={brew} bean={bean} />;
+          })}
         </section>
       </section>
     </main>

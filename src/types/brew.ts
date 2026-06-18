@@ -1,16 +1,3 @@
-export type CoffeeInfo = {
-  name: string;
-  roaster: string;
-  origin?: string;
-  region?: string;
-  farm?: string;
-  producer?: string;
-  altitude?: string;
-  variety?: string;
-  process?: string;
-  roastDate: string;
-};
-
 export type RecipeStep = {
   time: string;
   water: string;
@@ -42,7 +29,7 @@ export type TastingRatings = {
 export type Brew = {
   id: string;
   date: string;
-  coffee: CoffeeInfo;
+  beanId: string;
   recipe: BrewRecipe;
   rating?: number;
   ratings?: TastingRatings;
