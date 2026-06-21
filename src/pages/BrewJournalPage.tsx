@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { loadLocalBrews } from "../lib/brewStorage";
 import BrewCard from "../components/BrewCard";
 import { brews } from "../data/brews";
 import { beans } from "../data/beans";
@@ -5,6 +7,12 @@ import "../styles/coffee.css";
 import "../styles/brewJournal.css";
 
 export default function BrewJournalPage() {
+  const [localBrews] = useState(loadLocalBrews);
+
+  const journalBrews = [...localBrews, ...brews].sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
+
   return (
     <main className="coffeePage journalPage">
       <section className="journalShell">
@@ -18,13 +26,19 @@ export default function BrewJournalPage() {
             </p>
           </div>
 
-          <a className="coffeeButton" href="/coffee">
-            Back to coffee
-          </a>
+          <div className="journalHeaderActions">
+            <a className="coffeeButton" href="/coffee/journal/new">
+              Add brew
+            </a>
+
+            <a className="coffeeButton journalBackButton" href="/coffee">
+              Back to coffee
+            </a>
+          </div>
         </header>
 
         <section className="brewList" aria-label="Brew journal entries">
-          {brews.map((brew) => {
+          {journalBrews.map((brew) => {
             const bean = beans.find((bean) => bean.id === brew.beanId);
 
             if (!bean) {

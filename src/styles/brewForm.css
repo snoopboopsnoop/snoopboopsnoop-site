@@ -1,0 +1,230 @@
+.brewFormPage {
+  align-items: flex-start;
+}
+
+.brewFormShell {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.brewFormHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.brewFormHeader .coffeeEyebrow {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+.brewFormHeader h1 {
+  margin: 0;
+  color: #b18365;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.brewFormHeader p {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: #5f4a3d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.brewForm {
+  display: grid;
+  gap: 20px;
+}
+
+.brewFormSection {
+  padding: 24px;
+  border: 1px solid #dac7b8;
+  border-radius: 24px;
+  background: #fffaf5;
+}
+
+.brewFormSection h2 {
+  margin: 0 0 18px;
+  color: #2c1a12;
+  font-size: 1.35rem;
+}
+
+.brewFormSectionHeading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.brewFormSectionHeading h2 {
+  margin: 0;
+}
+
+.brewFormGrid,
+.ratingFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.brewForm label {
+  display: grid;
+  gap: 7px;
+  color: #5f4a3d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.brewForm input,
+.brewForm select,
+.brewForm textarea {
+  width: 100%;
+  border: 1px solid #dac7b8;
+  border-radius: 12px;
+  padding: 11px 12px;
+  background: #fff;
+  color: #2c1a12;
+  font: inherit;
+}
+
+.brewForm textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.brewForm input:focus,
+.brewForm select:focus,
+.brewForm textarea:focus {
+  outline: 2px solid #b18365;
+  outline-offset: 2px;
+}
+
+.brewFormFullWidth {
+  margin-top: 18px;
+}
+
+.recipeStepFormList {
+  display: grid;
+  gap: 12px;
+}
+
+.recipeStepFormRow {
+  display: grid;
+  grid-template-columns: 100px 100px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+  padding: 14px;
+  border-radius: 16px;
+  background: #fff4ea;
+}
+
+.ratingSlider {
+  display: grid;
+  gap: 8px;
+}
+
+.ratingSliderHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #5f4a3d;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.ratingSliderHeader strong {
+  color: #2c1a12;
+}
+
+.ratingSlider input[type="range"] {
+  width: 100%;
+  margin: 0;
+  accent-color: #b18365;
+  cursor: pointer;
+}
+
+.brewFormSecondaryButton,
+.brewFormRemoveButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border: 1px solid #dac7b8;
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: #fff4ea;
+  color: #2c1a12;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brewFormSecondaryButton:hover,
+.brewFormRemoveButton:hover {
+  background: #f1dfcf;
+}
+
+.brewFormRemoveButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.brewFormActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-bottom: 24px;
+}
+
+.brewFormActions .coffeeButton,
+.brewFormActions .brewFormSecondaryButton {
+  width: 160px;
+  min-height: 42px;
+  margin-top: 0;
+  padding: 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 760px) {
+  .brewFormHeader {
+    display: block;
+  }
+
+  .brewFormHeader .coffeeButton {
+    margin-top: 24px;
+  }
+
+  .brewFormGrid,
+  .ratingFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .recipeStepFormRow {
+    grid-template-columns: 1fr;
+  }
+
+  .brewFormRemoveButton {
+    width: 100%;
+  }
+
+  .brewFormActions {
+    flex-direction: column-reverse;
+  }
+
+  .brewFormActions .coffeeButton,
+  .brewFormActions .brewFormSecondaryButton {
+    width: 100%;
+  }
+}

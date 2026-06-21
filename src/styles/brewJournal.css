@@ -44,6 +44,19 @@
   color: #5f4a3d;
 }
 
+.journalHeaderActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.journalBackButton {
+  background: #fff4ea;
+  color: #2c1a12;
+  border: 1px solid #dac7b8;
+}
+
 .brewList {
   display: grid;
   gap: 16px;
@@ -292,8 +305,9 @@
   .journalHeader p {
     margin-top: 16px;
   }
-
-  .journalHeader .coffeeButton {
+  
+  .journalHeaderActions {
+    justify-content: flex-start;
     margin-top: 24px;
   }
 
