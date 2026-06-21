@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loadLocalBrews } from "../lib/brewStorage";
+import { loadLocalBeans } from "../lib/beanStorage";
 import BrewCard from "../components/BrewCard";
 import { brews } from "../data/brews";
 import { beans } from "../data/beans";
@@ -8,7 +9,9 @@ import "../styles/brewJournal.css";
 
 export default function BrewJournalPage() {
   const [localBrews] = useState(loadLocalBrews);
+  const [localBeans] = useState(loadLocalBeans);
 
+  const allBeans = [...localBeans, ...beans];
   const journalBrews = [...localBrews, ...brews].sort((a, b) =>
     b.date.localeCompare(a.date),
   );
@@ -39,7 +42,7 @@ export default function BrewJournalPage() {
 
         <section className="brewList" aria-label="Brew journal entries">
           {journalBrews.map((brew) => {
-            const bean = beans.find((bean) => bean.id === brew.beanId);
+            const bean = allBeans.find((bean) => bean.id === brew.beanId);
 
             if (!bean) {
               return null;

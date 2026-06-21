@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { beans } from "../data/beans";
 import { addLocalBrew } from "../lib/brewStorage";
+import { loadLocalBeans } from "../lib/beanStorage";
 import type { RecipeStep, TastingRatings } from "../types/brew";
 import "../styles/coffee.css";
 import "../styles/brewForm.css";
@@ -23,7 +24,11 @@ function withUnit(value: string, unit: string) {
 }
 
 export default function AddBrewPage() {
-  const currentBeans = beans.filter((bean) => bean.status === "current");
+  const [localBeans] = useState(loadLocalBeans);
+
+  const currentBeans = [...localBeans, ...beans].filter(
+    (bean) => bean.status === "current",
+  );
 
   const [beanId, setBeanId] = useState(currentBeans[0]?.id ?? "");
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10));

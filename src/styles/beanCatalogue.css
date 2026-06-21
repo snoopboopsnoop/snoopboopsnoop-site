@@ -39,6 +39,19 @@
   color: #5f4a3d;
 }
 
+.beanCatalogueHeaderActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.beanCatalogueBackButton {
+  border: 1px solid #dac7b8;
+  background: #fff4ea;
+  color: #2c1a12;
+}
+
 .beanShelf {
   display: grid;
   grid-template-columns: repeat(3, minmax(180px, 1fr));
@@ -229,7 +242,8 @@
     display: block;
   }
 
-  .beanCatalogueHeader .coffeeButton {
+  .beanCatalogueHeaderActions {
+    justify-content: flex-start;
     margin-top: 24px;
   }
 

@@ -1,0 +1,153 @@
+.beanFormPage {
+  align-items: flex-start;
+}
+
+.beanFormShell {
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.beanFormHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.beanFormHeader .coffeeEyebrow {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+.beanFormHeader h1 {
+  margin: 0;
+  color: #b18365;
+  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.beanFormHeader p {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: #5f4a3d;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.beanForm {
+  display: grid;
+  gap: 20px;
+}
+
+.beanFormSection {
+  padding: 24px;
+  border: 1px solid #dac7b8;
+  border-radius: 24px;
+  background: #fffaf5;
+}
+
+.beanFormSection h2 {
+  margin: 0 0 18px;
+  color: #2c1a12;
+  font-size: 1.35rem;
+}
+
+.beanFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.beanForm label {
+  display: grid;
+  gap: 7px;
+  color: #5f4a3d;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.beanForm input,
+.beanForm select {
+  width: 100%;
+  border: 1px solid #dac7b8;
+  border-radius: 12px;
+  padding: 11px 12px;
+  background: #fff;
+  color: #2c1a12;
+  font: inherit;
+}
+
+.beanForm input:focus,
+.beanForm select:focus {
+  outline: 2px solid #b18365;
+  outline-offset: 2px;
+}
+
+.beanFormFullWidth {
+  width: 100%;
+}
+
+.beanFormActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-bottom: 24px;
+}
+
+.beanFormSecondaryButton,
+.beanFormActions .coffeeButton {
+  width: 170px;
+  min-height: 42px;
+  margin-top: 0;
+  padding: 9px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beanFormSecondaryButton {
+  border: 1px solid #dac7b8;
+  border-radius: 999px;
+  background: #fff4ea;
+  color: #2c1a12;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.beanFormSecondaryButton:hover {
+  background: #f1dfcf;
+}
+
+.beanFormBackButton {
+  border: 1px solid #dac7b8;
+  background: #fff4ea;
+  color: #2c1a12;
+}
+
+@media (max-width: 760px) {
+  .beanFormHeader {
+    display: block;
+  }
+
+  .beanFormBackButton {
+    margin-top: 24px;
+  }
+
+  .beanFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .beanFormActions {
+    flex-direction: column-reverse;
+  }
+
+  .beanFormSecondaryButton,
+  .beanFormActions .coffeeButton {
+    width: 100%;
+  }
+}

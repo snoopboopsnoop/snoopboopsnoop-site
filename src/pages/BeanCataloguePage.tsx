@@ -1,10 +1,16 @@
+import { useState } from "react";
 import BeanBag from "../components/BeanBag";
 import { beans } from "../data/beans";
+import { loadLocalBeans } from "../lib/beanStorage";
 import "../styles/coffee.css";
 import "../styles/beanCatalogue.css";
 
 export default function BeanCataloguePage() {
-  const currentBeans = beans.filter((bean) => bean.status === "current");
+  const [localBeans] = useState(loadLocalBeans);
+
+  const allBeans = [...localBeans, ...beans];
+
+  const currentBeans = allBeans.filter((bean) => bean.status === "current");
 
   return (
     <main className="coffeePage beanCataloguePage">
@@ -19,9 +25,15 @@ export default function BeanCataloguePage() {
             </p>
           </div>
 
-          <a className="coffeeButton" href="/coffee">
-            Back to coffee
-          </a>
+          <div className="beanCatalogueHeaderActions">
+            <a className="coffeeButton" href="/coffee/beans/new">
+              Add bean
+            </a>
+
+            <a className="coffeeButton beanCatalogueBackButton" href="/coffee">
+              Back to coffee
+            </a>
+          </div>
         </header>
 
         <section className="beanShelf" aria-label="Current coffee beans">
