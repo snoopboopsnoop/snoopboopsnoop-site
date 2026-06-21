@@ -79,13 +79,25 @@ export default function BrewCard({
           </button>
 
           {isLocal && (
-            <button
-              className="brewDeleteButton"
-              type="button"
-              onClick={() => onDelete(brew.id)}
-            >
-              Delete brew
-            </button>
+            <>
+              <button
+                className="brewSectionButton"
+                type="button"
+                onClick={() => {
+                  window.location.href = `/coffee/journal/edit/${brew.id}`;
+                }}
+              >
+                Edit brew
+              </button>
+
+              <button
+                className="brewDeleteButton"
+                type="button"
+                onClick={() => onDelete(brew.id)}
+              >
+                Delete brew
+              </button>
+            </>
           )}
         </div>
       </div>

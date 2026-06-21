@@ -78,7 +78,7 @@ export default function BeanBag({
           <p className="beanFlipHint">Click to flip back</p>
         </div>
       </button>
-      
+
       {isLocal && (
         <div className="beanBagManage">
           <button
@@ -93,6 +93,15 @@ export default function BeanBag({
 
           {isManageOpen && (
             <div className="beanBagManageMenu">
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = `/coffee/beans/edit/${bean.id}`;
+                }}
+              >
+                Edit bean
+              </button>
+
               {bean.status === "current" && (
                 <button
                   type="button"

@@ -27,6 +27,14 @@ export function addLocalBrew(brew: Brew) {
   saveLocalBrews([brew, ...existingBrews]);
 }
 
+export function updateLocalBrew(updatedBrew: Brew) {
+  const updatedBrews = loadLocalBrews().map((brew) =>
+    brew.id === updatedBrew.id ? updatedBrew : brew,
+  );
+
+  saveLocalBrews(updatedBrews);
+}
+
 export function clearLocalBrews() {
   window.localStorage.removeItem(STORAGE_KEY);
 }
