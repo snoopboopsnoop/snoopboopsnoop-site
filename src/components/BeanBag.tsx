@@ -3,10 +3,19 @@ import type { Bean } from "../types/bean";
 
 type BeanBagProps = {
   bean: Bean;
+  isLocal: boolean;
+  onMarkFinished: (beanId: string) => void;
+  onDelete: (beanId: string) => void;
 };
 
-export default function BeanBag({ bean }: BeanBagProps) {
+export default function BeanBag({
+  bean,
+  isLocal,
+  onMarkFinished,
+  onDelete,
+}: BeanBagProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [isManageOpen, setIsManageOpen] = useState(false);
 
   return (
     <article className="beanBag">
@@ -69,6 +78,47 @@ export default function BeanBag({ bean }: BeanBagProps) {
           <p className="beanFlipHint">Click to flip back</p>
         </div>
       </button>
+      
+      {isLocal && (
+        <div className="beanBagManage">
+          <button
+            className="beanBagManageToggle"
+            type="button"
+            onClick={() => setIsManageOpen(!isManageOpen)}
+            aria-expanded={isManageOpen}
+            aria-label={`Manage ${bean.name}`}
+          >
+            •••
+          </button>
+
+          {isManageOpen && (
+            <div className="beanBagManageMenu">
+              {bean.status === "current" && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    onMarkFinished(bean.id);
+                    setIsManageOpen(false);
+                  }}
+                >
+                  Mark finished
+                </button>
+              )}
+
+              <button
+                className="beanBagDeleteButton"
+                type="button"
+                onClick={() => {
+                  onDelete(bean.id);
+                  setIsManageOpen(false);
+                }}
+              >
+                Delete bean
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </article>
   );
 }

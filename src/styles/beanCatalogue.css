@@ -213,6 +213,65 @@
   overflow-wrap: break-word;
 }
 
+.beanBagManage {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+}
+
+.beanBagManageToggle {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(44, 26, 18, 0.15);
+  border-radius: 999px;
+  background: rgba(255, 250, 245, 0.92);
+  color: #2c1a12;
+  font: inherit;
+  font-weight: 900;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+
+.beanBagManageToggle:hover {
+  background: #fffaf5;
+}
+
+.beanBagManageMenu {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  width: max-content;
+  min-width: 150px;
+  overflow: hidden;
+  border: 1px solid #dac7b8;
+  border-radius: 14px;
+  background: #fffaf5;
+  box-shadow: 0 12px 24px rgba(44, 26, 18, 0.16);
+}
+
+.beanBagManageMenu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 10px 12px;
+  background: transparent;
+  color: #2c1a12;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.beanBagManageMenu button:hover {
+  background: #fff4ea;
+}
+
+.beanBagManageMenu .beanBagDeleteButton {
+  color: #9c2f22;
+}
+
 .beanTastingNotes {
   display: flex;
   flex-wrap: wrap;

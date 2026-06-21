@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loadLocalBrews } from "../lib/brewStorage";
+import { deleteLocalBrew, loadLocalBrews } from "../lib/brewStorage";
 import { loadLocalBeans } from "../lib/beanStorage";
 import BrewCard from "../components/BrewCard";
 import { brews } from "../data/brews";
@@ -15,6 +15,19 @@ export default function BrewJournalPage() {
   const journalBrews = [...localBrews, ...brews].sort((a, b) =>
     b.date.localeCompare(a.date),
   );
+
+  function deleteBrew(brewId: string) {
+    const confirmed = window.confirm(
+      "Delete this local brew? This cannot be undone.",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    deleteLocalBrew(brewId);
+    window.location.reload();
+  }
 
   return (
     <main className="coffeePage journalPage">
@@ -48,7 +61,17 @@ export default function BrewJournalPage() {
               return null;
             }
 
-            return <BrewCard key={brew.id} brew={brew} bean={bean} />;
+            const isLocal = localBrews.some((localBrew) => localBrew.id === brew.id);
+
+            return (
+              <BrewCard
+                key={brew.id}
+                brew={brew}
+                bean={bean}
+                isLocal={isLocal}
+                onDelete={deleteBrew}
+              />
+            );
           })}
         </section>
       </section>

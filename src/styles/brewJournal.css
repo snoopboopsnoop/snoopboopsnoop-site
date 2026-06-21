@@ -163,6 +163,22 @@
   background: #f1dfcf;
 }
 
+.brewDeleteButton {
+  border: 1px solid #e2afa8;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: #fff4ea;
+  color: #9c2f22;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.brewDeleteButton:hover {
+  background: #fde4df;
+}
+
 .brewDetails {
   border-top: 1px solid #ead9cb;
   padding: 20px 22px 22px;

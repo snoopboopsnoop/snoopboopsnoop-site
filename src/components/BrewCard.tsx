@@ -5,9 +5,16 @@ import type { Brew } from "../types/brew";
 type BrewCardProps = {
   brew: Brew;
   bean: Bean;
+  isLocal: boolean;
+  onDelete: (brewId: string) => void;
 };
 
-export default function BrewCard({ brew, bean }: BrewCardProps) {
+export default function BrewCard({
+  brew,
+  bean,
+  isLocal,
+  onDelete,
+}: BrewCardProps) {
   const [openSection, setOpenSection] = useState<
     "coffee" | "recipe" | "notes" | null
   >(null);
@@ -70,6 +77,16 @@ export default function BrewCard({ brew, bean }: BrewCardProps) {
           >
             {openSection === "notes" ? "Hide notes" : "Tasting"}
           </button>
+
+          {isLocal && (
+            <button
+              className="brewDeleteButton"
+              type="button"
+              onClick={() => onDelete(brew.id)}
+            >
+              Delete brew
+            </button>
+          )}
         </div>
       </div>
 

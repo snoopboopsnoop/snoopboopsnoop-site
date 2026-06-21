@@ -30,3 +30,9 @@ export function addLocalBrew(brew: Brew) {
 export function clearLocalBrews() {
   window.localStorage.removeItem(STORAGE_KEY);
 }
+
+export function deleteLocalBrew(id: string) {
+  const updatedBrews = loadLocalBrews().filter((brew) => brew.id !== id);
+
+  saveLocalBrews(updatedBrews);
+}

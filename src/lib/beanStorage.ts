@@ -30,3 +30,17 @@ export function addLocalBean(bean: Bean) {
 export function clearLocalBeans() {
   window.localStorage.removeItem(STORAGE_KEY);
 }
+
+export function updateLocalBean(updatedBean: Bean) {
+  const updatedBeans = loadLocalBeans().map((bean) =>
+    bean.id === updatedBean.id ? updatedBean : bean,
+  );
+
+  saveLocalBeans(updatedBeans);
+}
+
+export function deleteLocalBean(id: string) {
+  const updatedBeans = loadLocalBeans().filter((bean) => bean.id !== id);
+
+  saveLocalBeans(updatedBeans);
+}
