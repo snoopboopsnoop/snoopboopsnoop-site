@@ -3,6 +3,8 @@ import { beans } from "../data/beans";
 import { addLocalBrew } from "../lib/brewStorage";
 import { loadLocalBeans } from "../lib/beanStorage";
 import type { RecipeStep, TastingRatings } from "../types/brew";
+import WaterRecipeForm from "../components/WaterRecipeForm";
+import { createWaterDraft, waterDraftError, waterDraftToRecipe } from "../lib/waterDraft";
 import "../styles/coffee.css";
 import "../styles/brewForm.css";
 
@@ -43,6 +45,8 @@ export default function AddBrewPage() {
   const [totalWater, setTotalWater] = useState("");
   const [waterTemperature, setWaterTemperature] = useState("");
   const [totalTime, setTotalTime] = useState("");
+  const [waterRecipe, setWaterRecipe] = useState(() => createWaterDraft());
+  const [saveError, setSaveError] = useState("");
 
   const [rating, setRating] = useState("");
   const [notes, setNotes] = useState("");
@@ -108,6 +112,12 @@ export default function AddBrewPage() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const waterError = waterDraftError(waterRecipe);
+    if (waterError) {
+      setSaveError(waterError);
+      return;
+    }
+
     if (!beanId || !method || !dose || !totalWater || !notes) {
       return;
     }
@@ -140,6 +150,7 @@ export default function AddBrewPage() {
         totalWater: withUnit(totalWater, "g") ?? "",
         waterTemperature: withUnit(waterTemperature, "°C"),
         totalTime: totalTime || undefined,
+        waterRecipe: waterDraftToRecipe(waterRecipe),
         steps: cleanedSteps.map((step) => ({
           ...step,
           water: withUnit(step.water, "g") ?? "",
@@ -155,7 +166,12 @@ export default function AddBrewPage() {
         .filter(Boolean),
     };
 
-    addLocalBrew(newBrew);
+    try {
+      addLocalBrew(newBrew);
+    } catch {
+      setSaveError("Could not save this brew. Check that browser storage is available and has space.");
+      return;
+    }
 
     window.location.href = "/coffee/journal";
   }
@@ -320,6 +336,8 @@ export default function AddBrewPage() {
             </div>
           </section>
 
+          <WaterRecipeForm value={waterRecipe} onChange={setWaterRecipe} />
+
           <section className="brewFormSection">
             <div className="brewFormSectionHeading">
               <h2>Recipe steps</h2>
@@ -430,6 +448,7 @@ export default function AddBrewPage() {
             </label>
           </section>
 
+          {saveError && <p role="alert" className="waterError">{saveError}</p>}
           <div className="brewFormActions">
             <a className="brewFormSecondaryButton" href="/coffee/journal">
               Cancel

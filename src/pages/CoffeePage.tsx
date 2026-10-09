@@ -9,8 +9,8 @@ export default function CoffeePage() {
         <h1>Brew journal + bean shelf</h1>
 
         <p>
-          This will eventually become a place to log brews, review recipes, and
-          keep track of the coffee beans currently at home.
+          Log brews, review recipes, and keep track of your coffee beans and
+          water concentrates.
         </p>
 
         <div className="coffeeCardGrid">
@@ -22,6 +22,10 @@ export default function CoffeePage() {
           <a className="coffeeCard" href="/coffee/beans">
             <h2>Bean catalogue</h2>
             <p>A visual shelf of coffee bags, each clickable for more info.</p>
+          </a>
+          <a className="coffeeCard" href="/coffee/water">
+            <h2>Water shelf</h2>
+            <p>Mineral concentrate batches and drop calibrations for your brews.</p>
           </a>
         </div>
       </section>

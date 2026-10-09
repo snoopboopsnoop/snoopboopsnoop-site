@@ -1,3 +1,5 @@
+import type { WaterRecipe } from "./water";
+
 export type RecipeStep = {
   time: string;
   water: string;
@@ -14,6 +16,7 @@ export type BrewRecipe = {
   totalWater: string;
   waterTemperature?: string;
   totalTime?: string;
+  waterRecipe?: WaterRecipe;
   steps: RecipeStep[];
 };
 

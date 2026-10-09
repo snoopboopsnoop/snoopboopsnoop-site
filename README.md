@@ -1,4 +1,10 @@
-# React + TypeScript + Vite
+# snoopboopsnoop coffee journal
+
+A React + TypeScript + Vite coffee journal with a bean catalogue and a Water shelf for mineral concentrate batches. Brew and concentrate records are saved locally in the browser.
+
+See [Water recipes](docs/water-recipes.md) for logging instructions, calibration units, GH/KH calculations, and storage behavior. Use `npm run dev` for development, `npm run build` for production, `npm run lint` for lint checks, and `npm test` (Node 22.6+) for water calculation and persistence tests.
+
+## Vite template notes
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 

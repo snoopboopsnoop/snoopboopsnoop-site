@@ -3,6 +3,8 @@ import { beans } from "../data/beans";
 import { loadLocalBeans } from "../lib/beanStorage";
 import { loadLocalBrews, updateLocalBrew } from "../lib/brewStorage";
 import type { Brew, RecipeStep, TastingRatings } from "../types/brew";
+import WaterRecipeForm from "../components/WaterRecipeForm";
+import { createWaterDraft, waterDraftError, waterDraftToRecipe } from "../lib/waterDraft";
 import "../styles/coffee.css";
 import "../styles/brewForm.css";
 
@@ -75,6 +77,8 @@ function EditBrewForm({ brew }: { brew: Brew }) {
     removeUnit(brew.recipe.waterTemperature, "°C"),
   );
   const [totalTime, setTotalTime] = useState(brew.recipe.totalTime ?? "");
+  const [waterRecipe, setWaterRecipe] = useState(() => createWaterDraft(brew.recipe.waterRecipe));
+  const [saveError, setSaveError] = useState("");
 
   const [rating, setRating] = useState(
     brew.rating !== undefined ? String(brew.rating) : "",
@@ -144,6 +148,12 @@ function EditBrewForm({ brew }: { brew: Brew }) {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    const waterError = waterDraftError(waterRecipe);
+    if (waterError) {
+      setSaveError(waterError);
+      return;
+    }
+
     const tastingRatings: TastingRatings = {};
 
     for (const key of ratingKeys) {
@@ -154,33 +164,39 @@ function EditBrewForm({ brew }: { brew: Brew }) {
       }
     }
 
-    updateLocalBrew({
-      ...brew,
-      date,
-      beanId,
-      recipe: {
-        method,
-        brewer: brewer || undefined,
-        filter: filter || undefined,
-        grinder: grinder || undefined,
-        grindSetting: grindSetting || undefined,
-        dose: withUnit(dose, "g") ?? "",
-        totalWater: withUnit(totalWater, "g") ?? "",
-        waterTemperature: withUnit(waterTemperature, "°C"),
-        totalTime: totalTime || undefined,
-        steps: steps.map((step) => ({
-          ...step,
-          water: withUnit(step.water, "g") ?? "",
-        })),
-      },
-      rating: rating ? Number(rating) : undefined,
-      ratings: tastingRatings,
-      notes,
-      tastingNotes: tastingNotes
-        .split(",")
-        .map((note) => note.trim())
-        .filter(Boolean),
-    });
+    try {
+      updateLocalBrew({
+        ...brew,
+        date,
+        beanId,
+        recipe: {
+          method,
+          brewer: brewer || undefined,
+          filter: filter || undefined,
+          grinder: grinder || undefined,
+          grindSetting: grindSetting || undefined,
+          dose: withUnit(dose, "g") ?? "",
+          totalWater: withUnit(totalWater, "g") ?? "",
+          waterTemperature: withUnit(waterTemperature, "°C"),
+          totalTime: totalTime || undefined,
+          waterRecipe: waterDraftToRecipe(waterRecipe),
+          steps: steps.map((step) => ({
+            ...step,
+            water: withUnit(step.water, "g") ?? "",
+          })),
+        },
+        rating: rating ? Number(rating) : undefined,
+        ratings: tastingRatings,
+        notes,
+        tastingNotes: tastingNotes
+          .split(",")
+          .map((note) => note.trim())
+          .filter(Boolean),
+      });
+    } catch {
+      setSaveError("Could not save changes. Check that browser storage is available and has space.");
+      return;
+    }
 
     window.location.href = "/coffee/journal";
   }
@@ -329,6 +345,8 @@ function EditBrewForm({ brew }: { brew: Brew }) {
             </div>
           </section>
 
+          <WaterRecipeForm value={waterRecipe} onChange={setWaterRecipe} />
+
           <section className="brewFormSection">
             <div className="brewFormSectionHeading">
               <h2>Recipe steps</h2>
@@ -435,6 +453,7 @@ function EditBrewForm({ brew }: { brew: Brew }) {
             </label>
           </section>
 
+          {saveError && <p role="alert" className="waterError">{saveError}</p>}
           <div className="brewFormActions">
             <a className="brewFormSecondaryButton" href="/coffee/journal">
               Cancel

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Bean } from "../types/bean";
 import type { Brew } from "../types/brew";
+import WaterRecipeSummary from "./WaterRecipeSummary";
 
 type BrewCardProps = {
   brew: Brew;
@@ -132,6 +133,8 @@ export default function BrewCard({
             />
             <InfoItem label="Total time" value={brew.recipe.totalTime} />
           </dl>
+
+          {brew.recipe.waterRecipe && <WaterRecipeSummary recipe={brew.recipe.waterRecipe} />}
 
           <ol className="recipeSteps">
             {brew.recipe.steps.map((step) => (

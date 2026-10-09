@@ -6,9 +6,14 @@ import AddBrewPage from "./pages/AddBrewPage";
 import AddBeanPage from "./pages/AddBeanPage";
 import EditBeanPage from "./pages/EditBeanPage";
 import EditBrewPage from "./pages/EditBrewPage";
+import WaterShelfPage from "./pages/WaterShelfPage";
 
 export default function App() {
   const path = window.location.pathname;
+
+  if (path === "/coffee/water") {
+    return <WaterShelfPage />;
+  }
 
   if (path === "/coffee") {
     return <CoffeePage />;

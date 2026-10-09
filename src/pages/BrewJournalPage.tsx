@@ -43,6 +43,9 @@ export default function BrewJournalPage() {
           </div>
 
           <div className="journalHeaderActions">
+            <a className="coffeeButton journalBackButton" href="/coffee/water">
+              Water shelf
+            </a>
             <a className="coffeeButton" href="/coffee/journal/new">
               Add brew
             </a>
